@@ -1,68 +1,77 @@
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .cross {
-  position: absolute;
+    position: absolute;
 }
 
 .cross.x {
-  border-bottom: 1px dashed red;
-  width: 100%;
+    border-bottom: 1px dashed red;
+    width: 100%;
 }
 
 .cross.y {
-  border-right: 1px dashed red;
-  height: 100%;
+    border-right: 1px dashed red;
+    height: 100%;
 }
 
 .card-wrapper {
-  width: 200px;
-  height: 400px;
-  background-color: grey;
-  float: left;
-  margin-left: 15px;
-  margin-top: 15px;
+    width: 200px;
+    height: 400px;
+    background-color: grey;
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 
 .stamina-bar,
 .health-bar {
-  width: 190px;
-  height: 20px;
-  margin: 5px 5px 5px 5px;
-  position: relative;
-  background-color: cornsilk;
+    width: 190px;
+    height: 20px;
+    margin: 5px 5px 5px 5px;
+    position: relative;
+    background-color: cornsilk;
 }
+
 .stamina-inner {
-  background-color: orange;
+    background-color: orange;
 }
 
 .health-inner {
-  background-color: orangered;
+    background-color: orangered;
 }
 
 .avatar-block {
-  width: 190px;
-  height: 300px;
-  margin: 5px 5px 5px 5px;
-  background-color: burlywood;
+    width: 190px;
+    height: 300px;
+    margin: 5px 5px 5px 5px;
+    background-color: burlywood;
 }
 
 .inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .avatar-img {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .title {
-  width: 100%;
-  height: 20px;
+    width: 100%;
+    height: 20px;
+}
+
+.download-more {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }

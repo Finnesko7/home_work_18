@@ -1,36 +1,61 @@
 var wrapper = document.getElementById('wrapper');
-
 var form = document.getElementById('filter-form');
+var buttonMore = document.getElementById('button_download_more');
+var nextPage = '';
 
-function requestCharacters(fitler, success) {
-  get(
-    'https://rickandmortyapi.com/api/character/?' + serialize(fitler),
-    function(data) {
-      var arrayOfCharacters = data.results.map(function(character) {
-        var c = new Champion(character.name, 200, 150);
-        c.setImage(character.image);
-        return c;
-      });
+function requestCharacters(url, success) {
+    get(
+        url,
+        function (data) {
+            var arrayOfCharacters = data.results.map(function (character) {
+                var c = new Champion(character.name, 200, 150);
+                c.setImage(character.image);
+                return c;
+            });
 
-      success(arrayOfCharacters);
-    }
-  );
+            if (data.info.next.length !== 0) {
+                console.log('Show more');
+                buttonMore.style.display = 'flex';
+                nextPage = data.info.next;
+            } else {
+                buttonMore.style.display = 'none';
+            }
+
+            success(arrayOfCharacters);
+        }
+    );
 }
 
-form.elements.characterName.addEventListener(
-  'input',
-  debounce(function() {
+
+var downloadData = function (url) {
     requestCharacters(
-      {
-        name: this.value,
-        gender: 'male'
-      },
-      function(arrayOfCharacters) {
-        wrapper.innerHTML = '';
-        arrayOfCharacters.forEach(function(champ) {
-          champ.render(wrapper);
-        });
-      }
+        url,
+        function (arrayOfCharacters) {
+            arrayOfCharacters.forEach(function (champ) {
+                champ.render(wrapper);
+            });
+        }
     );
-  }, 200)
+};
+
+var downloadBySearch = function (name) {
+    let params = serialize({
+        name: name,
+        gender: 'male'
+    });
+
+    downloadData('https://rickandmortyapi.com/api/character/?' + params)
+};
+
+form.elements.characterName.addEventListener(
+    'input',
+    debounce(function () {
+        downloadBySearch(this.value)
+    }, 200)
 );
+
+var downloadMore = function () {
+    downloadData(nextPage);
+};
+
+buttonMore.addEventListener('click', downloadMore);
