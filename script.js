@@ -4,26 +4,23 @@ var buttonMore = document.getElementById('button_download_more');
 var nextPage = '';
 
 function requestCharacters(url, success) {
-    get(
-        url,
-        function (data) {
-            var arrayOfCharacters = data.results.map(function (character) {
-                var c = new Champion(character.name, 200, 150);
-                c.setImage(character.image);
-                return c;
-            });
+    get(url).then(function (data) {
+        var arrayOfCharacters = data.results.map(function (character) {
+            var c = new Champion(character.name, 200, 150);
+            c.setImage(character.image);
+            return c;
+        });
 
-            if (data.info.next.length !== 0) {
-                console.log('Show more');
-                buttonMore.style.display = 'flex';
-                nextPage = data.info.next;
-            } else {
-                buttonMore.style.display = 'none';
-            }
-
-            success(arrayOfCharacters);
+        if (data.info.next.length !== 0) {
+            console.log('Show more');
+            buttonMore.style.display = 'flex';
+            nextPage = data.info.next;
+        } else {
+            buttonMore.style.display = 'none';
         }
-    );
+
+        success(arrayOfCharacters);
+    });
 }
 
 
